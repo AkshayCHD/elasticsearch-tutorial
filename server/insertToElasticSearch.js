@@ -13,9 +13,9 @@ async function run() {
       body: {
         mappings: {
           properties: {
-            id: { type: "keyword" },
-            city: { type: "keyword" },
-            state: { type: "keyword" },
+            id: { type: "text" },
+            city: { type: "text" },
+            state: { type: "text" },
             pop: { type: "integer" },
           },
         },
@@ -24,7 +24,6 @@ async function run() {
     { ignore: [400] }
   );
 
-  console.log(__dirname);
   const jsonContent = fs.readFileSync(`${__dirname}/data.json`, "utf8");
   const dataset = JSON.parse(jsonContent).dataset;
 
@@ -53,8 +52,6 @@ async function run() {
     console.log(erroredDocuments);
   }
 
-  const { body: count } = await client.count({ index: "tweets" });
-  console.log(count);
 }
 
 run().catch(console.log);

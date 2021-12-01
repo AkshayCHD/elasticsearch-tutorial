@@ -47,6 +47,7 @@ app.get("/elastic", async (req, res, next) => {
             multi_match: {
               query: text,
               fields: ["city", "state", "id"],
+              type: "phrase_prefix"
             },
           },
         },
